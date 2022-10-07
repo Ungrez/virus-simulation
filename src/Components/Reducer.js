@@ -1,9 +1,5 @@
 export let simulationObjects = [];
 
-let date = new Date();
-let current_date =
-  date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-
 export const reducer = (props) => {
   const {
     indicatorR,
@@ -30,6 +26,11 @@ export const reducer = (props) => {
         pm: 0,
         pr: 0,
       };
+      if (i !== 0 && i === toRecoveryDays) {
+        console.log(lastDay);
+        lastDay.pr = simulationObjects[0].pi;
+      } else if (i > toRecoveryDays) {
+      }
 
       if (i !== 0 && i === toDeathDays) {
         newDay.pi = (lastDay.pi - indicatorM) * indicatorR;
