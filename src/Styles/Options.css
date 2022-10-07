@@ -1,0 +1,41 @@
+div#options {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex-basis: 30%;
+  background-color: #eee;
+  padding: 30px;
+}
+div#options input[type="text"],
+input[type="number"] {
+  width: 100%;
+  border: 2px solid #666;
+  margin: 8px 0;
+  outline: none;
+  padding: 8px;
+  transition: 0.3s;
+  font-size: 16px;
+  font-weight: bold;
+}
+div#options input[type="text"]:hover,
+input[type="number"]:hover {
+  border-color: dodgerblue;
+  box-shadow: 0 0 8px dodgerblue;
+}
+div#options h3 {
+  padding: 10px 0;
+}
+div#options button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: dodgerblue;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 5px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+div#options button:hover {
+  box-shadow: 0 0 8px dodgerblue;
+}

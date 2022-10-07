@@ -1,0 +1,60 @@
+div#diagram {
+  flex-direction: column;
+  display: flex;
+  padding: 20px;
+  flex-grow: 1;
+}
+div#info {
+  display: flex;
+  flex-basis: 15%;
+  justify-content: space-between;
+}
+div#info div.info-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: 26px;
+  flex-basis: 23%;
+  border-radius: 10px;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5);
+  transition: 0.3s;
+}
+div#info div.info-container svg {
+  font-size: 50px;
+}
+div#info div.info-container:hover {
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.6);
+}
+div#info div.info-container:nth-child(1) {
+  background: rgb(0, 249, 255);
+  background: linear-gradient(
+    90deg,
+    rgba(0, 249, 255, 1) 0%,
+    rgba(0, 249, 255, 0.5102415966386555) 100%
+  );
+}
+div#info div.info-container:nth-child(2) {
+  background: rgb(255, 188, 0);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 188, 0, 1) 0%,
+    rgba(255, 188, 0, 0.5102415966386555) 100%
+  );
+}
+div#info div.info-container:nth-child(3) {
+  background: rgb(105, 232, 62);
+  background: linear-gradient(
+    90deg,
+    rgba(105, 232, 62, 1) 0%,
+    rgba(105, 232, 62, 0.5102415966386555) 100%
+  );
+}
+
+div#info div.info-container:nth-child(4) {
+  background: rgb(250, 57, 57);
+  background: linear-gradient(
+    90deg,
+    rgba(250, 57, 57, 1) 0%,
+    rgba(255, 0, 0, 0.5102415966386555) 100%
+  );
+}
