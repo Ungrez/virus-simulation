@@ -15,7 +15,6 @@ const Diagram = () => {
         <div className="info-container">
           <div>
             <h4>Healthy</h4>
-            <h4>{simulationObjects.length && simulationObjects[0].pv}</h4>
           </div>
           <GroupsIcon />
         </div>

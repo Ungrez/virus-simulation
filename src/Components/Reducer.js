@@ -28,21 +28,32 @@ export const reducer = (props) => {
       };
       if (i !== 0 && i === toRecoveryDays) {
         console.log(lastDay);
-        lastDay.pr = simulationObjects[0].pi;
-      } else if (i > toRecoveryDays) {
+        newDay.pr = simulationObjects[i - toRecoveryDays].pi;
+        newDay.pi -= newDay.pr;
+      } else if (i > toRecoveryDays && i > toDeathDays) {
+        lastDay.pr =
+          lastDay.pr + (simulationObjects[i - toRecoveryDays].pi - indicatorM);
+        lastDay.pi -= lastDay.pr;
+      } else {
+        console.log(simulationObjects);
+        // lastDay.pr = simulationObjects[i - toRecoveryDays].pi;
+        // lastDay.pi -= lastDay.pr;
       }
 
       if (i !== 0 && i === toDeathDays) {
         newDay.pi = (lastDay.pi - indicatorM) * indicatorR;
         newDay.pm = indicatorM;
         newDay.pv = populationSize - newDay.pi - newDay.pm;
+        newDay.pr += lastDay.pr;
       } else if (i > toDeathDays) {
         newDay.pi = (lastDay.pi - indicatorM) * indicatorR;
         newDay.pm = lastDay.pm + indicatorM;
         newDay.pv = populationSize - newDay.pi - newDay.pm;
+        newDay.pr += lastDay.pr;
       } else {
         newDay.pi = lastDay.pi * indicatorR;
         newDay.pv = populationSize - newDay.pi;
+        newDay.pr += lastDay.pr;
       }
       simulationObjects.push(newDay);
       lastDay = newDay;
