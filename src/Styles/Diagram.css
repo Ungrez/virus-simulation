@@ -1,6 +1,7 @@
 div#diagram {
   flex-direction: column;
   display: flex;
+  justify-content: space-between;
   padding: 20px;
   flex-grow: 1;
 }
@@ -57,4 +58,7 @@ div#info div.info-container:nth-child(4) {
     rgba(250, 57, 57, 1) 0%,
     rgba(255, 0, 0, 0.5102415966386555) 100%
   );
+}
+div#diagram canvas {
+  max-width: 100%;
 }

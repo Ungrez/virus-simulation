@@ -1,65 +1,49 @@
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
-import { Line } from "react-chartjs-2";
+export const reducer = (props) => {
+  const { N, P, I, R, M, Ti, Tm, Ts } = props;
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
+  let dataNow = {
+    Pi: Number(I),
+    Pv: P - I,
+    Pm: 0,
+    Pr: 0,
+    S: 0,
+    D: 1,
+  };
+  let results = [dataNow];
 
-export const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: "top",
-    },
-    title: {
-      display: true,
-    },
-  },
-};
+  for (let i = 1; i <= Ts - 1; i++) {
+    // dane z poprzedniej iteracji
 
-const labels = ["January", "February", "March", "April", "May", "June", "July"];
+    let currentData = {
+      ...dataNow,
+    };
 
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: "Healthy",
-      data: [100000, 80000, 75000, 75000, 80000, 79000],
-      borderColor: "rgb(0, 249, 255)",
-      backgroundColor: "rgb(0, 249, 255)",
-    },
-    {
-      label: "Infected",
-      data: [50, 1200, 2400, 3100, 5800],
-      borderColor: "rgb(255, 188, 0)",
-      backgroundColor: "rgb(255, 188, 0)",
-    },
-    {
-      label: "Recovery",
-      data: [0, 18800, 15000, 14000, 2000],
-      borderColor: "rgb(105, 232, 62)",
-      backgroundColor: "rgb(105, 232, 62)",
-    },
-    {
-      label: "Deaths",
-      data: [10, 50, 3000, 500, 1000],
-      borderColor: "rgb(250, 57, 57)",
-      backgroundColor: "rgb(250, 57, 57)",
-    },
-  ],
+    if (i - Tm >= 0 && currentData.Pi > 0 && Tm < Ti) {
+      console.log("jestem mniejszy");
+    }
+
+    if (currentData.Pv) {
+      currentData.Pi += Math.round(currentData.Pi * R);
+      currentData.Pi = Math.min(P - currentData.Pr, currentData.Pi);
+      currentData.Pv = P - currentData.Pi - currentData.Pr;
+      currentData.Pv = Math.max(0, currentData.Pv);
+    }
+
+    if (i - Ti >= 0) {
+      let day = results[i - Ti];
+      currentData.Pi -= day.Pi;
+      currentData.Pi = Math.max(0, currentData.Pi);
+      currentData.Pr = Math.max(0, currentData.Pr);
+      currentData.Pr += day.Pi;
+      currentData.Pr = Math.min(currentData.Pr, P);
+    }
+
+    results[i] = currentData;
+    currentData.S =
+      currentData.Pi + currentData.Pv + currentData.Pm + currentData.Pr;
+    currentData.D = i + 1;
+    dataNow = currentData;
+  }
+  console.log(results);
+  return results;
 };
